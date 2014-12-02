@@ -1,15 +1,28 @@
 package edu.jsu.mcis;
 
+/**
+ *
+ * @author Group One 
+ */
 public class TooManyArgumentsException extends RuntimeException {
 	
 	private String unexpectedArgument;
 	private String exceptionClassInfo;
 	
-	public TooManyArgumentsException(String s) {
+    /**
+     * This method checks for too many argument exceptions.
+     * @param s the unexpected number of arguments in the exception. 
+     */
+    public TooManyArgumentsException(String s) {
 			unexpectedArgument = s;
 			setExceptionClassName();
 	}
-	public String getUnexpectedArgument() {
+
+    /**
+     * This method gets the unexpected argument that is a string.
+     * @return Returns the unexpected argument.
+     */
+    public String getUnexpectedArgument() {
 		return unexpectedArgument;
 	}
 

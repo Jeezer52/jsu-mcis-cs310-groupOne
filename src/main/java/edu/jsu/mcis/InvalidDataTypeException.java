@@ -1,25 +1,46 @@
 package edu.jsu.mcis;
 
+/**
+ *
+ * @author Group One
+ */
 public class InvalidDataTypeException extends RuntimeException {
 	private Argument arg;
 	private String value;
 	private String exceptionClassInfo;
 	
-	public InvalidDataTypeException(Argument arg, String value) {
+    /**
+     * This method checks for an invalid datatype exception.
+     * @param arg a invalid datatype exception that is an argument.
+     * @param value a invalid datatype exception that is an argument.  
+     */
+    public InvalidDataTypeException(Argument arg, String value) {
 			this.value= value;
 			this.arg=arg;
 			setExceptionClassName();
 	}
 	
-	public String getValue() {
+    /**
+     * This method gets a value that is a string.
+     * @return Returns the value. 
+     */
+    public String getValue() {
 		return value;
 	}
 	
-	public String getType(){
+    /**
+     * This method gets the argument type that is a string.
+     * @return Returns the argument type. 
+     */
+    public String getType(){
 		return arg.getType();
 	}
 	
-	public String getName(){
+    /**
+     * This method gets a name that is a string.
+     * @return Returns the argument name. 
+     */
+    public String getName(){
 		return arg.getName();
 	}
 	
@@ -32,3 +53,4 @@ public class InvalidDataTypeException extends RuntimeException {
 		exceptionClassInfo = this.getClass().getSimpleName();
 	}
 }
+

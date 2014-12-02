@@ -3,19 +3,41 @@ package edu.jsu.mcis;
 import java.util.*;
 import java.util.Scanner;
 
+/**
+ *
+ * @author Group One
+ */
 public class ArgumentParser {
 
 	private String programName ="";
-	protected List<String> positionalArgList;
-	protected List<String> optionalArgList;
-	protected Hashtable<String,Argument> argumentTable;
+
+    /**
+     * This method list the positional argument as a string.
+     */
+    protected List<String> positionalArgList;
+
+    /**
+     * This method list the optional argument as a string. 
+     */
+    protected List<String> optionalArgList;
+
+    /**
+     * This method list arguments in a table. The argument values can 
+     * be an integer, a float, a string, or boolean.
+     */
+    protected Hashtable<String,Argument> argumentTable;
 	private boolean helpFlagExits;
 	private boolean addedFlag;
 	private int [] restrictedIntValues;
 	private float [] restrictedFloatValues;
 	private String [] restrictedStringValues;
 	
-	public ArgumentParser(){
+    /**
+     * This method places the optional arguments and positional arguments in 
+     * an array list as a string, and this method places the argument table in 
+     * a hash table. 
+     */
+    public ArgumentParser(){
 		positionalArgList = new ArrayList<String>(5);
 		optionalArgList = new ArrayList<String>(5);
 		argumentTable = new Hashtable<String,Argument>(5);
@@ -23,33 +45,61 @@ public class ArgumentParser {
 		helpFlagExits = true;
 	}
 	
-	public void addArgument(String argumentName){
+    /**
+     * This method sets an argument name as a string and places the argument
+     * name in the argument table as a positional argument. 
+     * @param argumentName a positional argument that is a sting. 
+     */
+    public void addArgument(String argumentName){
 		argumentTable.put(argumentName, new Argument(argumentName));
 		positionalArgList.add(argumentName);
 	}
 	
-	
-	public void addArgument(Argument.DataType type, String argumentName){
+    /**
+     * This method adds an argument that checks the datatype and places the 
+     * argument in an argument table as a positional argument.
+     * @param type is a datatype argument.
+     * @param argumentName a positional argument that is a string. 
+     */
+    public void addArgument(Argument.DataType type, String argumentName){
 		argumentTable.put(argumentName, new Argument(type, argumentName));
 		positionalArgList.add(argumentName);
 	}
 
-	public void addArgument(String argumentName, Argument.DataType type){
+    /**
+     * This method adds an argument that checks the argument to be a string.
+     * @param argumentName an argument that is a string.
+     * @param type is a datatype argument.
+     */
+    public void addArgument(String argumentName, Argument.DataType type){
 		addArgument(type, argumentName);
 	}
 	
-	public void addFlag(String argumentName){
+    /**
+     * This method adds argument name to an argument table as an optional 
+     * list. 
+     * @param argumentName a name that is an optional argument.
+     */
+    public void addFlag(String argumentName){
 		argumentTable.put(argumentName, new Argument(Argument.DataType.BOOLEAN, argumentName));
 		optionalArgList.add(argumentName);
 		getArgument(argumentName).setValue("false");
 		addedFlag = true;
 	}
 	
-	public boolean getAddedFlag(){
+    /**
+     * This method gets the added flag.
+     * @return Returns the added flag.
+     */
+    public boolean getAddedFlag(){
 		return addedFlag;
 	}
 	
-	public void setRestrictedIntValues(int [] argumentArray){
+    /**
+     * This method sets the integer values to be restricted.
+     * @param argumentArray a set value that is an integer. 
+     */
+    public void setRestrictedIntValues(int [] argumentArray){
 		restrictedIntValues = new int [argumentArray.length];
 		
 		for (int i = 0; i < argumentArray.length; i ++){
@@ -58,7 +108,12 @@ public class ArgumentParser {
 		
 	}
 	
-	public boolean checkRestrictedIntValues(int a){
+    /**
+     * This method checks the restricted integer values.
+     * @param a a restricted value that is an integer.
+     * @return Returns the value is restricted.
+     */
+    public boolean checkRestrictedIntValues(int a){
 		boolean isRestricted = false;
 		
 		for(int i = 0; i < restrictedIntValues.length; i ++){
@@ -71,7 +126,11 @@ public class ArgumentParser {
 		return isRestricted;
 	}
 	
-	public void setRestrictedFloatValues(float [] argumentArray){
+    /**
+     * This method sets the float values to restricted.
+     * @param argumentArray a restricted value that is a float.
+     */
+    public void setRestrictedFloatValues(float [] argumentArray){
 		restrictedFloatValues = new float [argumentArray.length];
 		
 		for (int i = 0; i < argumentArray.length; i ++){
@@ -80,7 +139,12 @@ public class ArgumentParser {
 		
 	}
 	
-	public boolean checkRestrictedFloatValues(float a){
+    /**
+     * This method checks the restricted float values.
+     * @param a a restricted value that is a float.
+     * @return Returns the value is restricted. 
+     */
+    public boolean checkRestrictedFloatValues(float a){
 		boolean isRestricted = false;
 		
 		for(int i = 0; i < restrictedFloatValues.length; i ++){
@@ -93,7 +157,11 @@ public class ArgumentParser {
 		return isRestricted;
 	}
 	
-	public void setRestrictedStringValues(String [] argumentArray){
+    /**
+     * This method sets the string values to restricted.
+     * @param argumentArray a restricted value that is a string.
+     */
+    public void setRestrictedStringValues(String [] argumentArray){
 		restrictedStringValues = new String [argumentArray.length];
 		
 		for (int i = 0; i < argumentArray.length; i ++){
@@ -102,7 +170,12 @@ public class ArgumentParser {
 		
 	}
 	
-	public boolean checkRestrictedStringValues(String a){
+    /**
+     * This method checks the string values.
+     * @param a a restricted value that is a string.
+     * @return Returns the value is restricted. 
+     */
+    public boolean checkRestrictedStringValues(String a){
 		boolean isRestricted = false;
 		
 		for(int i = 0; i < restrictedStringValues.length; i ++){
@@ -115,33 +188,67 @@ public class ArgumentParser {
 		return isRestricted;
 	}
 
-	public void addOptionalArgument(Argument.DataType type, String argumentName, String defaultVal){
+    /**
+     * This method adds an optional argument that checks for argument name,
+     * defaultVal, and the datatype. 
+     * @param type is a datatype argument.
+     * @param argumentName is a string.
+     * @param defaultVal is a string. 
+     */
+    public void addOptionalArgument(Argument.DataType type, String argumentName, String defaultVal){
 		argumentTable.put(argumentName, new Argument(type, argumentName));
 		optionalArgList.add(argumentName);
 		getArgument(argumentName).setValue(defaultVal);
 	}
 	
-	public void addOptionalArgument(String argumentName, Argument.DataType type, String defaultVal){
+    /**
+     * This method adds an optional argument that contains argument name, 
+     * datatype, and a default value. 
+     * @param argumentName is a string.
+     * @param type is a datatype argument. 
+     * @param defaultVal is a string. 
+     */
+    public void addOptionalArgument(String argumentName, Argument.DataType type, String defaultVal){
 		addOptionalArgument(type, argumentName, defaultVal);
 	}
 	
-	public int getNumPosArguments(){
+    /**
+     * This method gets a positional argument that is an integer.
+     * @return Returns the size of the positional argument list. 
+     */
+    public int getNumPosArguments(){
 		return positionalArgList.size();
 	}
 	
-	public int getNumOptArguments(){
+    /**
+     * This method gets an optional argument that is an integer. 
+     * @return Returns the size of the optional argument list. 
+     */
+    public int getNumOptArguments(){
 		return optionalArgList.size();
 	}
 	
-	public int getNumArguments(){
+    /**
+     * This method gets an argument that is an integer. 
+     * @return Returns positional arguments and optional arguments.
+     */
+    public int getNumArguments(){
 		return getNumPosArguments()+getNumOptArguments();
 	}
 	
-	public void setHelpFlagExits(boolean h) {
+    /**
+     * This method sets the help flag to exit. 
+     * @param h a set boolean flag.
+     */
+    public void setHelpFlagExits(boolean h) {
 		helpFlagExits = h;
 	}
 	
-	public void parse(String s){
+    /**
+     * This method parses a string. 
+     * @param s a parse that is a string. 
+     */
+    public void parse(String s){
 		Scanner scan = new Scanner(s);
 		String nextVal = "";
 		boolean loop = true;
@@ -206,7 +313,12 @@ public class ArgumentParser {
 		}
 	}
 	
-	public Argument getArgument(String argName){
+    /**
+     * This method gets an argument that is a string. 
+     * @param argName an argument that is being retrieved.
+     * @return Returns an argument name.
+     */
+    public Argument getArgument(String argName){
 		if(argumentTable.containsKey(argName)){
 			return argumentTable.get(argName);
 		}
@@ -215,7 +327,12 @@ public class ArgumentParser {
 		}
 	}
 	
-	public Argument getArgumentByShortName(String shortName){
+    /**
+     * This method gets an argument by a short name.
+     * @param shortName a name that is being retrieved. 
+     * @return Returns a short name.
+     */
+    public Argument getArgumentByShortName(String shortName){
 		for(int i = 0; i < getNumOptArguments(); i ++){
 			if(shortName.equals(getArgument(optionalArgList.get(i)).getShortName()))
 				return getArgument(optionalArgList.get(i));
@@ -248,7 +365,11 @@ public class ArgumentParser {
 		return s;
 	}
 	
-	public void loadXML(String path){
+    /**
+     * This method loads XML files.
+     * @param path the path to the XML file.
+     */
+    public void loadXML(String path){
 		LoadXML loader = new LoadXML(path);
 		positionalArgList=loader.getPosArgs();
 		optionalArgList=loader.getOptArgs();

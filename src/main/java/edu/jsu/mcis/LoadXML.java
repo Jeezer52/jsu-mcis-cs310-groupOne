@@ -12,10 +12,18 @@ import java.io.IOException;
 import org.xml.sax.SAXException;
 import javax.xml.parsers.ParserConfigurationException;
 
+/**
+ *
+ * @author Group One 
+ */
 public class LoadXML extends ArgumentParser{
 	private File xmlFile; 
 
-	public LoadXML(String fileName){
+    /**
+     * This method loads the XML files.
+     * @param fileName the file name that is loaded from the XML file.
+     */
+    public LoadXML(String fileName){
 		
 		positionalArgList = new ArrayList<String>(5);
 		optionalArgList = new ArrayList<String>(5);
@@ -114,16 +122,28 @@ public class LoadXML extends ArgumentParser{
 		}catch (ParserConfigurationException ex) {throw new XMLException(fileName, "Critical error, please notify the developers [ParserConfigurationException].");
 		}
 	}
-		
+	
+        /**
+        * This method lists the positional arguments.
+        * @return Returns the positional arguments.
+        */
 	List getPosArgs(){
 
 		return positionalArgList;
 	}
 	
+        /**
+         * This method lists the optional arguments.
+         * @return Returns the optional arguments.
+         */
 	List getOptArgs(){
 		return optionalArgList;
 	}
 	
+        /**
+         * This method gets the arguments.
+         * @return Returns argument table. 
+         */
 	Hashtable getArgs(){
 		return argumentTable;
 	}
